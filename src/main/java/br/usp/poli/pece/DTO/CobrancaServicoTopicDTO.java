@@ -1,5 +1,6 @@
 package br.usp.poli.pece.DTO;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.Map;
 import javax.xml.crypto.Data;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,6 +24,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties
+@Document(collection = "cobrancaServicos")
 public class CobrancaServicoTopicDTO {
 
 	@Id
@@ -29,6 +32,8 @@ public class CobrancaServicoTopicDTO {
 	
 	
 	private Date dataRequisicao;
+	
+	private String competencia;
 	
 	@JsonProperty("proxyResponseTimeMs")
 	private Integer proxyResponseTimeMs;
@@ -90,6 +95,7 @@ public class CobrancaServicoTopicDTO {
 	
 	public CobrancaServicoTopicDTO() {
 		this.dataRequisicao = Calendar.getInstance().getTime();
+		this.competencia = new SimpleDateFormat("YYYYMM").format(dataRequisicao);
 	}
 	
 	

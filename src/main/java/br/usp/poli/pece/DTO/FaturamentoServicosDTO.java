@@ -1,6 +1,11 @@
 package br.usp.poli.pece.DTO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,20 +15,34 @@ import lombok.Setter;
 
 public class FaturamentoServicosDTO {
 	
-	private String mesReferencia;
+	@JsonProperty("_id")
+	private FaturamentoServicosIDDTO id;
+	@JsonProperty("count")
+	private Integer count;
+	@JsonProperty("competencia")
+	private String competencia;
+	@JsonProperty("valor")
+	private Double valor;
+	@JsonProperty("servico_uri")
+	private String servicoUri;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	
-	private List<ServicoCobrancaDto> servicos;
-	
-	private Double valorFinalFaturamento;
+
 	
 }
 
-class ServicoCobrancaDto{
+@Getter
+@Setter
+class FaturamentoServicosIDDTO{
 	
-	private String nomeServico;
-	private Integer quantidadeCobranca;
-	private Float valorUnitario;
-	private Double valorFinalServico;
+	@JsonProperty("uri")
+	private String uri;
+	@JsonProperty("competencia")
+	private String competencia;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	
 	
 	
 }

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.usp.poli.pece.DTO.CobrancaServicoTopicDTO;
 import br.usp.poli.pece.service.FaturamentoService;
 
-@SpringBootApplication
 @RestController
 public class ListenerCobrancaServicos {
 	

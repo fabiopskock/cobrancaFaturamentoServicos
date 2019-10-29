@@ -1,10 +1,8 @@
 package br.usp.poli.pece.DTO;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -13,36 +11,25 @@ import lombok.Setter;
 @Getter
 @Setter
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FaturamentoServicosDTO {
-	
-	@JsonProperty("_id")
-	private FaturamentoServicosIDDTO id;
-	@JsonProperty("count")
-	private Integer count;
-	@JsonProperty("competencia")
-	private String competencia;
-	@JsonProperty("valor")
-	private Double valor;
-	@JsonProperty("servico_uri")
-	private String servicoUri;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-	
 
+	@JsonProperty("servicosFaturados")
+	private List<ServicosFaturamento> servicos;
+	
+	
+	@JsonProperty("total_fatura")
+	public Double calcularValorTotal() {
+		Double totalFatura = 0.0;
+		for (ServicosFaturamento servicosFaturamento : servicos) 
+			totalFatura +=  servicosFaturamento.getValorTotal();
+		
+		return totalFatura;
+	}
+	
+	public FaturamentoServicosDTO(List<ServicosFaturamento> servicos) {
+		this.servicos = servicos;
+	}
 	
 }
 
-@Getter
-@Setter
-class FaturamentoServicosIDDTO{
-	
-	@JsonProperty("uri")
-	private String uri;
-	@JsonProperty("competencia")
-	private String competencia;
-	@JsonIgnore
-	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-	
-	
-	
-}

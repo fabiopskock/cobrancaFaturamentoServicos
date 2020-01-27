@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.usp.poli.pece.DTO.CobrancaServicoTopicDTO;
 import br.usp.poli.pece.service.FaturamentoService;
 
+
+
 @RestController
 public class ListenerCobrancaServicos {
 	
@@ -28,8 +30,9 @@ public class ListenerCobrancaServicos {
 				CobrancaServicoTopicDTO cobrancaServicoDto =
 					mapper.readValue(cobrancaServicoDtoStr, CobrancaServicoTopicDTO.class);
 				if(cobrancaServicoDto.getStatus() == 200) {
+					System.out.println("Mensagem Recebida: "+cobrancaServicoDtoStr);
 					faturamentoService.incluirCobrancaServico(cobrancaServicoDto);
-					System.out.println(cobrancaServicoDtoStr);
+					
 				}
 			}
 		} catch (Exception e) {

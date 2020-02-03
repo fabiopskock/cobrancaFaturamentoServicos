@@ -15,12 +15,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 
 import br.usp.poli.pece.DAO.CobrancaRepository;
-import br.usp.poli.pece.DTO.CobrancaServicoTopicDTO;
+import br.usp.poli.pece.DTO.ConsumoServicoSaaSDTO;
 import br.usp.poli.pece.DTO.FaturamentoServicosDTO;
 import br.usp.poli.pece.DTO.ServicosFaturamento;
 
 @Service
-public class FaturamentoService {
+public class CobrancaServicosSaaSDAO {
 
 	@Autowired
 	private CobrancaRepository cobrancaRepository;
@@ -40,7 +40,6 @@ public class FaturamentoService {
 
 		UnwindOperation unwindOperation = Aggregation.unwind("servicos");
 
-//  		Multiply m = Multiply.valueOf("valor").multiplyBy("qtChamadasService");
 
 		ProjectionOperation projection = Aggregation.project("uri", "qtChamadasService", "$servicos.valor",
 				"$servicos.servico_uri", "$servicos.servico_name");
@@ -53,22 +52,15 @@ public class FaturamentoService {
 		FaturamentoServicosDTO faturamento = new FaturamentoServicosDTO(output.getMappedResults());
 		return faturamento;
 
-		// return cobrancaRepository.findbyMesCliente(mes, cliente);
 	}
 
-	public void incluirCobrancaServico(CobrancaServicoTopicDTO cobrancaServicoDto) {
-
-		// System.out.println(cobrancaServicoDto.toString());
+	public void registrarCobrancaServico(ConsumoServicoSaaSDTO cobrancaServicoDto) {
 
 		cobrancaRepository.insert(cobrancaServicoDto);
 
-		// List<CobrancaServicoTopicDTO> l = cobrancaRepository.findAll();
-		// l.size();
-		// cobrancaRepository.save(cobrancaServicoDto);
 	}
 
-	public List<CobrancaServicoTopicDTO> listarCobrancaServico() {
-
+	public List<ConsumoServicoSaaSDTO> listarCobrancaServico() {
 
 		return cobrancaRepository.findAll();
 

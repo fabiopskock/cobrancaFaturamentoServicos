@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.usp.poli.pece.DTO.CobrancaServicoTopicDTO;
+import br.usp.poli.pece.DTO.ConsumoServicoSaaSDTO;
 import br.usp.poli.pece.DTO.FaturamentoServicosDTO;
 import br.usp.poli.pece.DTO.MensagemDTO;
-import br.usp.poli.pece.service.FaturamentoService;
+import br.usp.poli.pece.service.CobrancaServicosSaaSDAO;
 
 @RestController
-public class ChamadaFaturamento {
+public class FaturamentoController {
 
 	@Autowired
-	private FaturamentoService faturamentoService;
+	private CobrancaServicosSaaSDAO faturamentoService;
 
 	@GetMapping("/faturamento/{cliente}/{competencia}")
 	public ResponseEntity obterFaturamentoServicos(
@@ -45,10 +45,10 @@ public class ChamadaFaturamento {
 			@RequestParam(name = "servico", required = false) String servico) {
 		try {
 
-			List<CobrancaServicoTopicDTO> cobrancas = faturamentoService.listarCobrancaServico();	
+			List<ConsumoServicoSaaSDTO> cobrancas = faturamentoService.listarCobrancaServico();	
 
 			
-			return new ResponseEntity<List<CobrancaServicoTopicDTO>>(cobrancas, HttpStatus.OK);
+			return new ResponseEntity<List<ConsumoServicoSaaSDTO>>(cobrancas, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<MensagemDTO>(new MensagemDTO("Erro interno"), HttpStatus.INTERNAL_SERVER_ERROR);
 		}

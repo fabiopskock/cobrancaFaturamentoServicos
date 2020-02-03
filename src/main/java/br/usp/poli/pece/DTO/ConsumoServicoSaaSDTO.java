@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.crypto.Data;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,7 +23,7 @@ import lombok.Setter;
 @JsonInclude(Include.NON_NULL)
 @JsonIgnoreProperties
 @Document(collection = "cobrancaServicos")
-public class CobrancaServicoTopicDTO {
+public class ConsumoServicoSaaSDTO {
 
 	@Id
 	private String id;
@@ -93,7 +91,7 @@ public class CobrancaServicoTopicDTO {
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	
-	public CobrancaServicoTopicDTO() {
+	public ConsumoServicoSaaSDTO() {
 		this.dataRequisicao = Calendar.getInstance().getTime();
 		this.competencia = new SimpleDateFormat("YYYYMM").format(dataRequisicao);
 	}

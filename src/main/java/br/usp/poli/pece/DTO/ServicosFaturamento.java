@@ -1,5 +1,7 @@
 package br.usp.poli.pece.DTO;
 
+import java.math.BigDecimal;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -11,9 +13,9 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServicosFaturamento{
 	@JsonProperty("qtChamadasService")
-	private Integer qtChamadasService;
+	private BigDecimal qtChamadasService;
 	@JsonProperty("valor")
-	private Double valor;
+	private BigDecimal valor;
 	@JsonProperty("servico_name")
 	private String servicoName;
 	@JsonProperty("uri")
@@ -22,13 +24,11 @@ public class ServicosFaturamento{
 	private String servicoUri;
 	@JsonProperty("remoteAddress")
 	private String remoteAddress;
-//	@JsonIgnore
-//	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	
 	
 	@JsonProperty("total_servico")
-	public Double getValorTotal() {
-		return valor*qtChamadasService;
+	public BigDecimal getValorTotal() {
+		return valor.multiply(qtChamadasService);
 	}
 	
 }

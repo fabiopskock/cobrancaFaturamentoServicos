@@ -1,5 +1,6 @@
 package br.usp.poli.pece.DTO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,11 +20,11 @@ public class FaturamentoServicosDTO {
 	
 	
 	@JsonProperty("total_fatura")
-	public Double calcularValorTotal() {
-		Double totalFatura = 0.0;
+	public BigDecimal calcularValorTotal() {
+		BigDecimal totalFatura = new BigDecimal(0);
 		for (ServicosFaturamento servicosFaturamento : servicos) 
-			totalFatura +=  servicosFaturamento.getValorTotal();
-		
+			totalFatura = totalFatura.add(servicosFaturamento.getValorTotal());
+
 		return totalFatura;
 	}
 	
